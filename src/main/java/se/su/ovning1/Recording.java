@@ -1,27 +1,24 @@
 package se.su.ovning1;
 
-public class Recording implements PriceableWithVAT25 {
+public abstract class Recording extends Item implements PriceableWithVAT25 {
     private String artist;
-    private String type;
     private int year;
     private int condition;
-    private double price;
+    private double originalPrice;
 
-    public Recording(String artist, String type, int year, int condition, double price) {
+    public Recording(String name, String artist, int year, int condition, double price) {
+        super(name);
         this.artist = artist;
-        this.type = type;
         this.year = year;
         this.condition = condition;
-        this.price = price;
+        this.originalPrice = price;
     }
 
     public String getArtist() {
         return artist;
     }
 
-    public String getType() {
-        return type;
-    }
+    public abstract String getType();
 
     public int getYear() {
         return year;
@@ -31,24 +28,26 @@ public class Recording implements PriceableWithVAT25 {
         return condition;
     }
 
-    @Override //Override från Priceable
-    public double getPrice() {
-        return price;
-    }
-
     public double getOriginalPrice() {
-        return price;
+        return originalPrice;
     }
 
-    @Override //Override är för att göra det tydligt att metoden "toString" ersätts, och för potentiellt hjälpa med felhantering
+    @Override
+    public double getPrice() {
+        double factor = Math.max(0, condition) / 10.0;
+        double adjusted = originalPrice * factor;
+        return Math.max(adjusted, 10.0);
+    }
+
+    @Override
     public String toString() {
-        return artist + " - " + type + " (" + year + "), condition: " + condition + ", price: $" + price;
+        return artist + " - " + getType() + " \"" + getName() + "\" (" + year + "), condition: " + condition + ", price: " + String.format("%.2f", getPrice()) + " kr";
     }
 
     //Interfaces
     @Override
     public double getVAT() {
-        return price * 0.25;
+        return getPrice() * 0.25;
     }
 
     @Override
