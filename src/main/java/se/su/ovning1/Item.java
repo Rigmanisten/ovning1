@@ -1,6 +1,6 @@
 package se.su.ovning1;
 
-public class Item {
+abstract class Item implements Priceable {
     private String name;
 
     public Item(String name) {
