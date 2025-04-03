@@ -5,3 +5,4 @@ public interface Priceable {
     public double getVAT();
     public double getPriceWithVAT();
 }
+

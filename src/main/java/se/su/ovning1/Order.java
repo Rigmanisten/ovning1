@@ -1,14 +1,14 @@
 package se.su.ovning1;
 
 public class Order {
-    private static long orderNumber = 1;
-    private long counter;
+    private long orderNumber;
+    private static long counter = 1;
     Item[] Items;
 
     Order(Item[] Items) {
         this.Items = Items;
-        this.orderNumber = orderNumber;
-        orderNumber++;
+        this.orderNumber = counter;
+        counter++;
     }
 
     public String getReceipt(){
@@ -24,7 +24,7 @@ public class Order {
                 }else { // Book
 
                 }
-            return receipt;
+            return sb.toString();
 
         }
     public double getTotalValue (){
