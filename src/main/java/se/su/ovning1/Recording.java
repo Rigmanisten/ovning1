@@ -10,7 +10,13 @@ public abstract class Recording extends Item implements PriceableWithVAT25 {
         super(name);
         this.artist = artist;
         this.year = year;
+        if (condition < 0 || condition > 10) {
+            throw new IllegalArgumentException("Conditions is greater than 10 or smallar than 0");
+        }
         this.condition = condition;
+
+
+
         this.originalPrice = price;
     }
 
