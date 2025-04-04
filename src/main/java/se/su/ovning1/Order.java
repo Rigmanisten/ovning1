@@ -14,26 +14,25 @@ public class Order {
     }
 
     public String getReceipt(){
-        String receipt ="";
-        for(Item item : items)
-            if(item instanceof LongPlay lp){
-                receipt = "Receipt for order #"+this.orderNumber+
-                        "\n-----------\n"+lp.getType()+
-                        " "+lp.toString()+ "\n Total excl. VAT: "+getTotalValue ()+
-                        "\n Total incl. VAT: "+getTotalValuePlusVAT();
-            }else if(item instanceof CompactDisc cp){
-                receipt = "Receipt for order #"+this.orderNumber+
-                        "\n-----------\n"+cp.getType()+
-                        " "+cp.toString()+ "\n Total excl. VAT: "+getTotalValue ()+
-                        "\n Total incl. VAT: "+getTotalValuePlusVAT();
-            }else if(item instanceof Book book){ // Book
-                receipt = "Receipt for order #"+this.orderNumber+
-                        "\n-----------\n"+book.getType()+
-                        " "+book.toString()+ "\n Total excl. VAT: "+getTotalValue ()+
-                        "\n Total incl. VAT: "+getTotalValuePlusVAT();
+        StringBuilder receipt = new StringBuilder();
+        receipt.append("Order #").append(orderNumber).append("\n-----------");
+        for(Item item : items) {
+            receipt.append("\n");
+            if (item instanceof LongPlay lp) {
+                receipt.append(lp.getType()).append(" ").append(lp.toString());
             }
-        return receipt;
+            if (item instanceof CompactDisc cp) {
+                receipt.append(cp.getType()).append(" ").append(cp.toString());
+            }
+            if (item instanceof Book book) {
+                receipt.append(book.getType()).append(" ").append(book.toString());
+            }
         }
+        receipt.append("\nTotal excl. VAT: ").append(getTotalValue())
+                .append("\nTotal incl. VAT: ").append(getTotalValuePlusVAT()).append("\n");
+        return receipt.toString();
+        }
+
     public double getTotalValue (){
         double total = 0;
         for(Item item : items){

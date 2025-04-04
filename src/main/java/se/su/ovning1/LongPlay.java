@@ -16,12 +16,11 @@ public class LongPlay extends Recording {
 
     @Override
     public double getPrice() {
-        double basePrice = Math.max(getOriginalPrice() * (Math.max(0, getCondition()) / 10.0), 10.0);
-
+        //currentyear är bara för att göra koden mer lättläst
         int currentYear = Year.now().getValue();
         int age = currentYear - getYear();
         double ageBonus = age * 5.0;
 
-        return basePrice + ageBonus;
+        return super.getPrice() + ageBonus;
     }
 }
