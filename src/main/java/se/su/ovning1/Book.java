@@ -36,8 +36,8 @@ public class Book extends Item implements PriceableWithVAT6 {
     public boolean getBound() {
         return this.bound;
     }
-
+    @Override
     public String toString() {
-        return this.getName() + " " + this.getAuthor() + " " + this.getPrice() + " " + this.getPriceWithVAT();
+        return "{ name=" + this.getName() + ", author=" + this.getAuthor() + ", bound= " + this.getBound() + ", price= " + this.getPrice() + ", price+vat=" +this.getPriceWithVAT() + " }";
     }
 }
