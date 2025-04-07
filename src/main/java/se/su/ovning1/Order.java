@@ -2,10 +2,10 @@ package se.su.ovning1;
 import java.util.Arrays;
 import java.util.List;
 public class Order {
-    private long orderNumber;
+    private final long orderNumber;
     private static long counter = 1;
     //Item[] items;
-    private List<Item> items;
+    private final List<Item> items;
 
     public Order (Item... items) {
         this.items = Arrays.asList(items);
