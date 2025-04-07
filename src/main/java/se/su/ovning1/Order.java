@@ -19,13 +19,13 @@ public class Order {
         for(Item item : items) {
             receipt.append("\n");
             if (item instanceof LongPlay lp) {
-                receipt.append(lp.getType()).append(" ").append(lp.toString());
+                receipt.append(lp.toString());
             }
             if (item instanceof CompactDisc cp) {
-                receipt.append(cp.getType()).append(" ").append(cp.toString());
+                receipt.append(cp.toString());
             }
             if (item instanceof Book book) {
-                receipt.append(book.getType()).append(" ").append(book.toString());
+                receipt.append(book.toString());
             }
         }
         receipt.append("\nTotal excl. VAT: ").append(getTotalValue())
