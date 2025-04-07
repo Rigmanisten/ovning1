@@ -4,7 +4,7 @@ public abstract class Recording extends Item implements PriceableWithVAT25 {
     private String artist;
     private int year;
     private int condition;
-    private double originalPrice;
+    private double price;
 
     protected Recording(String name, String artist, int year, int condition, double price) {
         super(name);
@@ -14,7 +14,7 @@ public abstract class Recording extends Item implements PriceableWithVAT25 {
             throw new IllegalArgumentException("Conditions is greater than 10 or smaller than 0");
         }
         this.condition = condition;
-        this.originalPrice = price;
+        this.price = price;
     }
 
     public String getArtist() {
@@ -30,11 +30,11 @@ public abstract class Recording extends Item implements PriceableWithVAT25 {
     @Override
     public double getPrice() {
         double factor = (double)condition/10;
-        double price = originalPrice * factor;
-        if (price < 10) {
+        double newPrice = price * factor;
+        if (newPrice < 10) {
             return 10;
         }
-        return price;
+        return newPrice;
     }
 
     @Override
@@ -47,6 +47,6 @@ public abstract class Recording extends Item implements PriceableWithVAT25 {
     }
 
     protected double getOriginalPrice() {
-        return originalPrice;
+        return price;
     }
 }
